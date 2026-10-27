@@ -23,10 +23,10 @@ new001,example.org,2026-10-22 14:30:00
 
 ## 자동 갱신 실행
 
-Vite 개발 서버와 별도 PowerShell 창에서 watcher를 실행합니다. `SourceFolder` 값은 현재 `website_data` 폴더의 실제 경로로 지정합니다. 파일 변경 확인은 기본 2초마다 수행하고, 원본 전체를 30분마다 다시 가져옵니다.
+Vite 개발 서버와 별도 PowerShell 창에서 watcher를 실행합니다. `SourceFolder` 값은 현재 `website_data` 폴더의 실제 경로로 지정합니다. 파일 변경 확인은 기본 10초마다 수행하고, 원본 전체를 30분마다 다시 가져옵니다.
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\watch-website-data.ps1 -SourceFolder "<현재 website_data 폴더의 전체 경로>" -PollSeconds 2 -RefreshMinutes 30
+powershell -ExecutionPolicy Bypass -File .\scripts\watch-website-data.ps1 -SourceFolder "<현재 website_data 폴더의 전체 경로>" -PollSeconds 10 -RefreshMinutes 30
 ```
 
 `<현재 website_data 폴더의 전체 경로>` 부분을 실제 경로로 바꿔 실행합니다. 예를 들어 폴더를 `D:\monitoring\website_data`로 옮겼다면 `-SourceFolder "D:\monitoring\website_data"`로 지정합니다.

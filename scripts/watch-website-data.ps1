@@ -2,7 +2,7 @@ param(
   [Parameter(Mandatory = $true)]
   [string] $SourceFolder,
   [string] $PublicFolder,
-  [int] $PollSeconds = 2,
+  [int] $PollSeconds = 10,
   [int] $RefreshMinutes = 30
 )
 
