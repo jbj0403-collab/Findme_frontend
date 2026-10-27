@@ -1,0 +1,10 @@
+import { ImageOff } from 'lucide-react';
+import { useState } from 'react';
+import { categoryForSite } from '../../../shared/data/categories.js';
+import CaptureImageViewer from '../../../shared/components/CaptureImageViewer.jsx';
+
+export default function ScreenshotGallery({ sites = [], onViewAll }) {
+ const [selected, setSelected] = useState(null);
+ const captures = [...sites].filter(site => site.capture).sort((a,b)=>(b.insertedAt || '').localeCompare(a.insertedAt || '')).slice(0, 12);
+ return <><section className="panel gallery-expanded p-4 sm:p-5"><div className="mb-4 flex items-center justify-between"><div><h2 className="panel-title">탐지 사이트 화면 캡처</h2><p className="mt-1 text-[10px] text-[var(--color-muted)]">이미지를 누르면 전체 화면으로 볼 수 있습니다.</p></div><a href="/sites" onClick={onViewAll} className="text-[11px] font-medium text-[var(--color-teal)] hover:text-[var(--color-text)]">더 보기 <span aria-hidden="true">→</span></a></div><div className="grid grid-cols-2 gap-3 sm:grid-cols-3 2xl:grid-cols-6">{captures.map(site=>{ const category=categoryForSite(site); return <article className="capture-card" key={site.id}><button type="button" className="capture-preview relative block !h-[116px] !w-full !cursor-zoom-in !p-0" onClick={() => setSelected(site)} aria-label={`${site.domain} 캡처 크게 보기`}><img className="h-full w-full object-cover" src={site.capture} alt={`${site.domain} 화면 캡처`} loading="lazy"/><span className="capture-overlay"><ImageOff size={15}/> 크게 보기</span></button><div className="flex items-center justify-between gap-2 px-2 py-2"><span className="truncate text-[10px] text-[var(--color-text-dim)]">{site.domain}</span><span className="tag tag-red">{category?.name || '미분류'}</span></div></article>; })}{!captures.length && <p className="col-span-full py-8 text-center text-xs text-[var(--color-muted)]">연결된 캡처 데이터가 없습니다.</p>}</div></section><CaptureImageViewer site={selected} onClose={() => setSelected(null)}/></>;
+}
