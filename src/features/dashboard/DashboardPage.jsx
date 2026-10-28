@@ -12,14 +12,13 @@ import SNSDetectionDistribution from './components/SNSDetectionDistribution.jsx'
 import ScreenshotGallery from './components/ScreenshotGallery.jsx';
 
 export default function DashboardPage({ sites, status, error, generatedAt, onReload, onNavigate }) {
-  const [query, setQuery] = useState('');
   const [period, setPeriod] = useState('최근 30일');
 
   return (
     <>
-      <PageHeader title="통합 대시보드" showSearch query={query} onQueryChange={setQuery} />
+      <PageHeader title="통합 대시보드" />
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-panel)] px-3 py-1.5 text-[11px]">
+        <div className="flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-panel)] px-3 py-1.5 text-[length:var(--size-11px)]">
           <span className="pulse-dot" />{status === 'error' ? '데이터 연결 오류' : status === 'loading' ? '데이터 불러오는 중' : '마지막 데이터 반영'}
           <span className="text-[var(--color-muted)]">{generatedAt ? `· ${formatDateTime(generatedAt, '')}` : ''}</span>
           {status === 'error' && <button className="ml-1 text-[var(--color-teal)]" onClick={onReload}>다시 시도</button>}
@@ -33,7 +32,7 @@ export default function DashboardPage({ sites, status, error, generatedAt, onRel
       <Overview sites={sites} />
       <TotalDetected sites={sites} />
       <DetectionTrend period={period} sites={sites} />
-      <div className="dashboard-row"><div className="distribution-stack"><DetectionDistribution sites={sites} /><SNSDetectionDistribution /></div><DetectionLog query={query} sites={sites} /><ReportStatus /></div>
+      <div className="dashboard-row"><div className="distribution-stack"><DetectionDistribution sites={sites} /><SNSDetectionDistribution /></div><DetectionLog sites={sites} /><ReportStatus /></div>
       <div className="dashboard-row dashboard-row-bottom"><ScreenshotGallery sites={sites} onViewAll={event => onNavigate(event, '/sites')} /></div>
     </>
   );

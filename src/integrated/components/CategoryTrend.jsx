@@ -33,11 +33,11 @@ export default function CategoryTrend({ sites }) {
   }, [sites]);
 
   return <section className="panel mt-5 p-4 sm:p-5">
-    <div className="mb-4 flex flex-wrap items-center justify-between gap-3"><div><h2 className="panel-title">분류별 수집 추이</h2><p className="mt-1 text-[10px] text-[var(--color-muted)]">웹사이트 데이터의 등록일 기준 최근 30일</p></div><div className="flex flex-wrap gap-x-4 gap-y-2">{series.map(item => <span key={item.id} className="legend"><i style={{ background: item.color }}/>{item.name}</span>)}</div></div>
+    <div className="mb-4 flex flex-wrap items-center justify-between gap-3"><div><h2 className="panel-title">분류별 수집 추이</h2><p className="mt-1 text-[length:var(--size-10px)] text-[var(--color-muted)]">웹사이트 데이터의 등록일 기준 최근 30일</p></div><div className="flex flex-wrap gap-x-4 gap-y-2">{series.map(item => <span key={item.id} className="legend"><i style={{ background: item.color }}/>{item.name}</span>)}</div></div>
     <div className="chart-wrap"><div className="chart-ylabels"><span>{max}</span><span>{Math.ceil(max * .75)}</span><span>{Math.ceil(max * .5)}</span><span>{Math.ceil(max * .25)}</span><span>0</span></div><div className="trend-chart" role="img" aria-label="최근 30일 분류별 사이트 데이터 등록 추이">{[0,1,2,3,4].map(line => <i key={line} className="grid-line" style={{ top: `${line * 25}%` }} />)}{series.map(item => {
       const points = item.values.map((value, index) => `${(index / (item.values.length - 1)) * 100},${100 - value / max * 92}`).join(' ');
-      return <svg key={item.id} className="chart-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points={points} fill="none" stroke={item.color} strokeWidth=".9" vectorEffect="non-scaling-stroke" strokeLinejoin="round" strokeLinecap="round"/></svg>;
+      return <svg key={item.id} className="chart-svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points={points} fill="none" stroke={item.color} strokeWidth="var(--stroke-detection-trend)" vectorEffect="non-scaling-stroke" strokeLinejoin="round" strokeLinecap="round"/></svg>;
     })}</div></div>
-    <div className="ml-10 mt-2 flex justify-between text-[9px] text-[var(--color-muted)]"><span>{days[0]?.slice(5).replace('-', '/')}</span><span>{days[7]?.slice(5).replace('-', '/')}</span><span>{days[14]?.slice(5).replace('-', '/')}</span><span>{days[21]?.slice(5).replace('-', '/')}</span><span>{days[29]?.slice(5).replace('-', '/')}</span></div>
+    <div className="ml-10 mt-2 flex justify-between text-[length:var(--size-9px)] text-[var(--color-muted)]"><span>{days[0]?.slice(5).replace('-', '/')}</span><span>{days[7]?.slice(5).replace('-', '/')}</span><span>{days[14]?.slice(5).replace('-', '/')}</span><span>{days[21]?.slice(5).replace('-', '/')}</span><span>{days[29]?.slice(5).replace('-', '/')}</span></div>
   </section>;
 }

@@ -9,8 +9,8 @@ export default function MetricCards({ sites }) {
       const Icon = icons[category.id] || Globe2;
       const count = sites.filter(site => category.sourceLabelIds.includes(Number(site.labelId))).length;
       return <article className="metric-card" key={category.id}>
-        <div className="flex items-start justify-between gap-2"><span className="min-h-8 text-xs leading-5 text-[var(--color-text-dim)]">{category.name}</span><span className="metric-icon" style={{ color: category.color, backgroundColor: `${category.color}1A` }}><Icon size={16}/></span></div>
-        <strong className="mt-3 block text-[26px] font-semibold leading-none tracking-[-.04em]">{count.toLocaleString('ko-KR')}<small className="ml-1 text-xs font-normal text-[var(--color-muted)]">개</small></strong>
+        <div className="flex items-start justify-between gap-2"><span className="min-h-8 text-xs leading-5 text-[var(--color-text-dim)]">{category.name}</span><span className="metric-icon metric-icon-colored" style={{ "--category-color": category.color }}><Icon size={16}/></span></div>
+        <strong className="mt-3 block text-[length:var(--size-26px)] font-semibold leading-none tracking-[var(--size-neg--04em)]">{count.toLocaleString('ko-KR')}<small className="ml-1 text-xs font-normal text-[var(--color-muted)]">개</small></strong>
       </article>;
     })}
   </section>;

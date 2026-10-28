@@ -22,7 +22,7 @@ export default function DistributionOverview() {
     </section>
     <section className="panel connection-distribution-panel">
       <h2 className="panel-title">연결 사이트 수 분포 박스</h2>
-      <div className="connection-bands">{bands.map(row => <div className="connection-band" key={row.label}><span className="connection-band-dot"/><span className="connection-band-label">{row.label}</span><span className="connection-band-track"><i style={{ width: `${row.fill}%` }}/><b style={{ left: `${row.fill}%`, width: `${Math.max(9, (100 - row.fill) * 0.5)}%` }}/></span><strong>{row.count}</strong></div>)}</div>
+      <div className="connection-bands">{bands.map((row, index) => <div className="connection-band" key={row.label}><span className="connection-band-dot"/><span className="connection-band-label">{row.label}</span><span className="connection-band-track"><i style={{ width: `${row.fill}%`, "--animation-order": index }}/><b style={{ left: `${row.fill}%`, width: `${Math.max(9, (100 - row.fill) * 0.5)}%`, "--animation-order": index }}/></span><strong>{row.count}</strong></div>)}</div>
       <div className="connection-legend"><span><i className="legend-pink"/>가입코드 (붉은 연결선 수)</span><span><i className="legend-blue"/>유포사이트</span></div>
     </section>
   </div>;
